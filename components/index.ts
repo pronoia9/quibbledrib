@@ -13,19 +13,4 @@ import ProjectActions from "./ProjectActions";
 import ProjectCard from "./ProjectCard";
 import ProjectForm from "./ProjectForm";
 
-export {
-  AuthProviders,
-  Button,
-  Categories,
-  CustomMenu,
-  Footer,
-  FormField,
-  LoadMore,
-  Modal,
-  Navbar,
-  ProfileMenu,
-  ProfilePage,
-  ProjectActions,
-  ProjectCard,
-  ProjectForm,
-};
+export { AuthProviders, Button, Categories, CustomMenu, Footer, FormField, LoadMore, Modal, Navbar, ProfileMenu, ProfilePage, ProjectActions, ProjectCard, ProjectForm, };
