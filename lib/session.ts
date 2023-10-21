@@ -13,10 +13,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
-  jwt: {
-    encode: ({ secret, token }) => {},
-    decode: async ({ secret, token }) => {},
-  },
+  // jwt: {
+  //   encode: ({ secret, token }) => {},
+  //   decode: async ({ secret, token }) => {},
+  // },
 
   theme: {
     colorScheme: 'light',
@@ -24,7 +24,20 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async session({ session }) {},
-    async signIn({ user }: { user: AdapterUser | User }) {},
+    async session({ session }) {
+      return session;
+    },
+    async signIn({ user }: { user: AdapterUser | User }) {
+      try {
+        // get the user if they exist
+
+        // if they dont exist, create them
+
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
   },
 };
