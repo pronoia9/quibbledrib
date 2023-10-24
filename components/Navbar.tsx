@@ -3,9 +3,10 @@ import Image from 'next/image';
 
 import { AuthProviders } from '@/components';
 import { NavLinks } from '@/constant';
+import { getCurrentUser } from '@/lib/session';
 
-const Navbar = () => {
-  const session = null;
+const Navbar = async () => {
+  const session = await getCurrentUser();
 
   return (
     <nav className='flexBetween navbar'>
