@@ -6,6 +6,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
 
 import { SessionInterface, UserProfile } from '@/common.types';
+import { getUser } from '@/lib/actions';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -31,9 +32,11 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ user }: { user: AdapterUser | User }) {
       try {
-        // get the user if they exist
+        const userExists = (await getUser(user?.email as string)) as { user?: UserProfile };
 
-        // if they dont exist, create them
+        if (!userExists.user) {
+          // await createUser
+        }
 
         return true;
       } catch (error) {
