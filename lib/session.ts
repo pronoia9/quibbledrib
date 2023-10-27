@@ -40,31 +40,30 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async session({ session }) {
-      const email = session?.user?.email as string;
-      try {
-        const data = (await getUser(email)) as { user?: UserProfile };
-        const newSession = {
-          ...session,
-          user: {
-            ...session.user,
-            ...data?.user,
-          },
-        };
-        return newSession;
-      } catch (error: any) {
-        console.error('Error retrieving user data: ', error.message);
-      }
-      return session;
-    },
+    // async session({ session }) {
+    //   const email = session?.user?.email as string;
+    //   try {
+    //     const data = (await getUser(email)) as { user?: UserProfile };
+    //     const newSession = {
+    //       ...session,
+    //       user: {
+    //         ...session.user,
+    //         ...data?.user,
+    //       },
+    //     };
+    //     return newSession;
+    //   } catch (error: any) {
+    //     console.error('Error retrieving user data: ', error.message);
+    //   }
+    //   return session;
+    // },
     async signIn({ user }: { user: AdapterUser | User }) {
       try {
         const userExists = (await getUser(user?.email as string)) as { user?: UserProfile };
-        if (!userExists.user) await createUser(user?.name as string, user?.email as string, user?.image as string);
-
+        if (!userExists.user) await createUser(user.name as string, user.email as string, user.image as string);
         return true;
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        console.log('Error checking if user exists: ', error.message);
         return false;
       }
     },
