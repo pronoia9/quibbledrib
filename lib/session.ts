@@ -28,6 +28,20 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async session({ session }) {
+      const email = session?.user?.email as string;
+      try {
+        const data = (await getUser(email)) as { user?: UserProfile };
+        const newSession = {
+          ...session,
+          user: {
+            ...session.user,
+            ...data?.user,
+          },
+        };
+        return newSession;
+      } catch (error) {
+        console.log('error retrieving user data', error);
+      }
       return session;
     },
     async signIn({ user }: { user: AdapterUser | User }) {
@@ -48,3 +62,7 @@ export async function getCurrentUser() {
   const session = (await getServerSession(authOptions)) as SessionInterface;
   return session;
 }
+
+// return a Google user
+// name, email, avatarUrl
+// projects, description, githubUrl, linkedInUrl
