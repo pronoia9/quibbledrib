@@ -74,7 +74,3 @@ export async function getCurrentUser() {
   const session = (await getServerSession(authOptions)) as SessionInterface;
   return session;
 }
-
-// return a Google user
-// name, email, avatarUrl
-// projects, description, githubUrl, linkedInUrl
